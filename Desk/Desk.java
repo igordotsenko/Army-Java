@@ -22,7 +22,7 @@ public class Desk {
         StringBuffer buffer = new StringBuffer();
 
         for ( int i = 0; i < deskSize; i++ ) {
-            buffer.append("+--");
+            buffer.append("+---");
         }
         buffer.append("+\n");
 
@@ -37,7 +37,7 @@ public class Desk {
         buffer.append("|");
         for ( int vertical = 0; vertical < deskSize; vertical++ ) {
             if ( isEmptyField(horizontal, vertical)) {
-                buffer.append("  ");
+                buffer.append("   ");
             } else {
                 buffer.append("Aa");
             }

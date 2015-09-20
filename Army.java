@@ -29,8 +29,7 @@ public class Army  {
 //        System.out.println("|   |");
 //        System.out.println("|   |");
 //        System.out.println("+---+");
-        System.out.println(desk.toString());
-//
+        System.out.println(desk.deskFields.length);
 //
 //
 //        System.out.println("---------------------------");
