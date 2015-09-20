@@ -1,5 +1,6 @@
 import SpellCasters.*;
 import Units.*;
+import Desk.*;
 
 public class Army  {
 
@@ -13,47 +14,33 @@ public class Army  {
         Healer healer = new Healer("Healer", 50, 5, 50);
         Warlock warlock = new Warlock("Warlcok", 50, 10, 60);
         Necromancer necr = new Necromancer("Necromancer", 50, 10, 50);
+        Desk desk = new Desk();
 
-        System.out.println(soldier.toString());
-        System.out.println(rogue.toString());
-        System.out.println(berserker.toString());
-        System.out.println(vampire.toString());
-        System.out.println(werewolf.toString());
-        System.out.println(wizard.toString());
-        System.out.println(healer.toString());
-        System.out.println(warlock.toString());
-        System.out.println(necr.toString());
-
-        System.out.println("---------------------------");
-        necr.castSpell(soldier);
-        necr.castSpell(rogue);
-        rogue.attack(necr);
-        System.out.println(soldier.toString());
-        System.out.println(rogue.toString());
-        System.out.println(necr.toString());
-
-        System.out.println("---------------------------");
-        for ( int i = 1; i <= 4; i++ ) {
-            rogue.attack(soldier);
-        }
-        System.out.println(soldier.toString());
-        System.out.println(rogue.toString());
-        System.out.println(necr.toString());
-
-        System.out.println("---------------------------");
-        for ( int i = 1; i <= 10; i++ ) {
-            vampire.attack(necr);
-            necr.addHitPoints(100);
-        }
-
-        System.out.println("---------------------------");
-        System.out.println(soldier.toString());
-        System.out.println(rogue.toString());
-        System.out.println(berserker.toString());
-        System.out.println(vampire.toString());
-        System.out.println(werewolf.toString());
-        System.out.println(wizard.toString());
-        System.out.println(healer.toString());
-        System.out.println(necr.toString());
+//        System.out.println(soldier.toString());
+//        System.out.println(rogue.toString());
+//        System.out.println(berserker.toString());
+//        System.out.println(vampire.toString());
+//        System.out.println(werewolf.toString());
+//        System.out.println(wizard.toString());
+//        System.out.println(healer.toString());
+//        System.out.println(warlock.toString());
+//        System.out.println(necr.toString());
+//        System.out.println("+---+");
+//        System.out.println("|   |");
+//        System.out.println("|   |");
+//        System.out.println("+---+");
+        System.out.println(desk.toString());
+//
+//
+//
+//        System.out.println("---------------------------");
+//        System.out.println(soldier.toString());
+//        System.out.println(rogue.toString());
+//        System.out.println(berserker.toString());
+//        System.out.println(vampire.toString());
+//        System.out.println(werewolf.toString());
+//        System.out.println(wizard.toString());
+//        System.out.println(healer.toString());
+//        System.out.println(necr.toString());
     }
 }
