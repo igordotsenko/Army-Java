@@ -5,16 +5,17 @@ import Desk.*;
 public class Army  {
 
     public static void main(String[] args) throws UnitIsDeadException, SelfAttackException, NotEnoughManaException, SlaveAlreadySummonedException, MasterAttackException {
-        Soldier soldier = new Soldier("Soldier", 50, 10);
-        Rogue rogue = new Rogue("Rogue", 50, 10);
-        Berserker berserker = new Berserker("Berserker", 50, 15);
-        Vampire vampire = new Vampire("Vampire", 50, 5);
-        Werewolf werewolf = new Werewolf("Werewolf", 60, 15);
-        Wizard wizard = new Wizard("Wizard", 50, 5, 50);
-        Healer healer = new Healer("Healer", 50, 5, 50);
-        Warlock warlock = new Warlock("Warlcok", 50, 10, 60);
-        Necromancer necr = new Necromancer("Necromancer", 50, 10, 50);
         Desk desk = new Desk();
+        Soldier soldier = new Soldier("Soldier", 50, 10, desk, 0, 0);
+//        Rogue rogue = new Rogue("Rogue", 50, 10);
+//        Berserker berserker = new Berserker("Berserker", 50, 15);
+//        Vampire vampire = new Vampire("Vampire", 50, 5);
+//        Werewolf werewolf = new Werewolf("Werewolf", 60, 15);
+//        Wizard wizard = new Wizard("Wizard", 50, 5, 50);
+//        Healer healer = new Healer("Healer", 50, 5, 50);
+//        Warlock warlock = new Warlock("Warlcok", 50, 10, 60);
+//        Necromancer necr = new Necromancer("Necromancer", 50, 10, 50);
+
 
 //        System.out.println(soldier.toString());
 //        System.out.println(rogue.toString());
@@ -29,7 +30,7 @@ public class Army  {
 //        System.out.println("|   |");
 //        System.out.println("|   |");
 //        System.out.println("+---+");
-        System.out.println(desk.deskFields.length);
+        System.out.println(desk.toString());
 //
 //
 //        System.out.println("---------------------------");

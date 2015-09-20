@@ -1,12 +1,14 @@
 package Units;
 
+import Desk.*;
 import Abilities.Ability;
 import States.State;
 import java.util.HashSet;
 import java.util.Iterator;
 
 public abstract class Unit implements Observer, Observable {
-        public enum UnitType {
+
+    public enum UnitType {
             SOLDIERT,
             ROGUET,
             BERSERKRT,
@@ -19,106 +21,117 @@ public abstract class Unit implements Observer, Observable {
             NECROMANCERT,
             DAEMONT
         }
-        protected String name;
-        protected int hitPoints;
-        protected int hitPointsLimit;
-        protected int damage;
-        protected UnitType unitType;
-        protected boolean undead;
-        protected Ability ability;
-        protected State currentState;
-        protected State altState;
-        protected HashSet<Unit> observers;
-        protected HashSet<Unit> observables;
+    protected String name;
+    protected String shortName;
+    protected int hitPoints;
+    protected int hitPointsLimit;
+    protected int damage;
+    protected UnitType unitType;
+    protected boolean undead;
+    protected Ability ability;
+    protected State currentState;
+    protected State altState;
+    protected HashSet<Unit> observers;
+    protected HashSet<Unit> observables;
+    protected Desk desk;
+    protected Point position;
 
-        public Unit(String name, int hitPoints, int damage) {
-            this.name = name;
-            this.hitPoints = hitPoints;
-            this.hitPointsLimit = hitPoints;
-            this.damage = damage;
-            this.undead = false;
-            this.observers = new HashSet<>();
-            this.observables = new HashSet<>();
-        }
+    public Unit(String name, int hitPoints, int damage, Desk desk, int positionX, int positionY) {
+        this.name = name;
+        this.hitPoints = hitPoints;
+        this.hitPointsLimit = hitPoints;
+        this.damage = damage;
+        this.undead = false;
+        this.observers = new HashSet<>();
+        this.observables = new HashSet<>();
+        this.desk = desk;
+        this.position = new Point(positionX, positionY);
+        desk.placeUnit(this);
+    }
 
-        protected void ensureIsAlive() throws UnitIsDeadException {
+    protected void ensureIsAlive() throws UnitIsDeadException {
             if ( hitPoints == 0 ) {
                 throw new Units.UnitIsDeadException();
             }
         }
-        private void ensureIsNotSelfAttack(Unit enemy) throws SelfAttackException {
+    private void ensureIsNotSelfAttack(Unit enemy) throws SelfAttackException {
             if ( this == enemy ) {
                 throw new SelfAttackException();
             }
         }
 
-
-        public final String getName() {
+    public final String getName() {
             return this.name;
         }
-        public final int getHitPoints() {
+
+    public String getShortName() {
+        return shortName;
+    }
+    public final int getHitPoints() {
             return hitPoints;
         }
-        public final int getHitPointsLimit() {
+    public final int getHitPointsLimit() {
             return hitPointsLimit;
         }
-        public final UnitType getUnitType() {
+    public final UnitType getUnitType() {
             return unitType;
         }
-        public final int getDamage() {
+    public final int getDamage() {
             return damage;
         }
-        public final boolean isUndead() {
+    public final boolean isUndead() {
             return undead;
         }
-        public final State getCurrentState() {
+    public final State getCurrentState() {
             return currentState;
         }
-        public final State getAltState() {
+    public final State getAltState() {
             return altState;
         }
-        public final HashSet<Unit> getObservers() {
+    public final HashSet<Unit> getObservers() {
             return observers;
         }
-        public final HashSet<Unit> getObservables() {
+    public final HashSet<Unit> getObservables() {
             return observables;
         }
+    public Point getPosition() {
+            return position;
+        }
 
-        public void setName(String newName) {
+    public void setName(String newName) {
             this.name = newName;
         }
-        public void setHitPoints(int newHitPoints) {
+    public void setHitPoints(int newHitPoints) {
             this.hitPoints = newHitPoints;
         }
-        public void setHitPointsLimit(int newHitPointsLimit) {
+    public void setHitPointsLimit(int newHitPointsLimit) {
             this.hitPointsLimit = newHitPointsLimit;
         }
-        public void setDamage(int newDamage) {
+    public void setDamage(int newDamage) {
             this.damage = newDamage;
         }
-        public void setUnitType(UnitType newUnitType) {
+    public void setUnitType(UnitType newUnitType) {
             unitType = newUnitType;
         }
-        public void setIsUndead() {
-            this.undead = !undead;
-        }
-        public void setCurrentState(State newCurrentState) {
-            currentState = newCurrentState;
-        }
-        public void setAltState(State newAltState) {
-            altState = newAltState;
-        }
-//
-        public void changeAbility(Ability newAbility) {
+    public void setIsUndead() {
+        this.undead = !undead;
+    }
+    public void setCurrentState(State newCurrentState) {
+        currentState = newCurrentState;
+    }
+    public void setAltState(State newAltState) {
+        altState = newAltState;
+    }
+
+    public void changeAbility(Ability newAbility) {
             ability = newAbility;
         }
-//
-        public void attack(Unit enemy) throws UnitIsDeadException, SelfAttackException, MasterAttackException {
+    public void attack(Unit enemy) throws UnitIsDeadException, SelfAttackException, MasterAttackException {
             ensureIsAlive();
             ensureIsNotSelfAttack(enemy);
             ability.attack(enemy);
         }
-        public void counterAttack(Unit enemy) throws UnitIsDeadException {
+    public void counterAttack(Unit enemy) throws UnitIsDeadException {
             try {
                 ensureIsAlive();
             } catch ( UnitIsDeadException e ) {
@@ -126,8 +139,8 @@ public abstract class Unit implements Observer, Observable {
             }
             enemy.ability.counterAttack(this);
         }
-//
-        public void takeDamage(int dmg) throws UnitIsDeadException {
+
+    public void takeDamage(int dmg) throws UnitIsDeadException {
             if ( dmg > hitPoints) {
                 hitPoints = 0;
                 notifyObservers();
@@ -136,10 +149,10 @@ public abstract class Unit implements Observer, Observable {
             }
             hitPoints -= dmg;
         }
-        public void takeMagicDamage(int dmg) {
+    public void takeMagicDamage(int dmg) {
             ability.takeMagicDamage(dmg);
         }
-        public void heal(int healPoints) throws UnitIsDeadException {
+    public void heal(int healPoints) throws UnitIsDeadException {
             ensureIsAlive();
 
             int newHitPoints = hitPoints + healPoints;
@@ -150,7 +163,7 @@ public abstract class Unit implements Observer, Observable {
             }
             hitPoints = newHitPoints;
         }
-        public void addHitPoints(int hitPoints) throws  UnitIsDeadException {
+    public void addHitPoints(int hitPoints) throws  UnitIsDeadException {
             ensureIsAlive();
 
             int newHitPoints = this.hitPoints + hitPoints;
@@ -162,24 +175,24 @@ public abstract class Unit implements Observer, Observable {
             this.hitPoints = newHitPoints;
         }
 
-        @Override
-        public void addObserver(Unit observer){
+    @Override
+    public void addObserver(Unit observer){
             observers.add(observer);
         }
-        @Override
-        public void removeObserver(Unit observer){
+    @Override
+    public void removeObserver(Unit observer){
             observers.remove(observer);
         }
-        @Override
-        public void addObservable(Unit observable){
+    @Override
+    public void addObservable(Unit observable){
             observables.add(observable);
             observable.addObserver(this);
         }
-        @Override
-        public void removeObservable(Unit observable){
+    @Override
+    public void removeObservable(Unit observable){
             observables.remove(observable);
         }
-        public void notifyObservers() throws UnitIsDeadException {
+    public void notifyObservers() throws UnitIsDeadException {
             Iterator<Unit> it = observers.iterator();
             Unit observer;
 
@@ -190,7 +203,7 @@ public abstract class Unit implements Observer, Observable {
             }
             observers.clear();
         }
-        public void notifyObservables() {
+    public void notifyObservables() {
             Iterator<Unit> it = observables.iterator();
             Unit observable;
 
@@ -200,13 +213,13 @@ public abstract class Unit implements Observer, Observable {
             }
             observables.clear();
         }
-//
-        public void transform() {
+
+    public void transform() {
             ability.changeState();
         }
 
-        @Override
-        public String toString() {
+    @Override
+    public String toString() {
             String out;
             StringBuffer buffer = new StringBuffer();
 

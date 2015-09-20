@@ -16,7 +16,9 @@ public class Desk {
         }
         return false;
     }
-
+    public void placeUnit(Unit unit) {
+        deskFields[unit.getPosition().getX()][unit.getPosition().getY()] = unit;
+    }
     private String printMerge() {
         String out = new String();
         StringBuffer buffer = new StringBuffer();
@@ -39,7 +41,8 @@ public class Desk {
             if ( isEmptyField(horizontal, vertical)) {
                 buffer.append("   ");
             } else {
-                buffer.append("Aa");
+                Unit placedUnit = deskFields[horizontal][vertical];
+                buffer.append(placedUnit.getShortName());
             }
             buffer.append("|");
         }

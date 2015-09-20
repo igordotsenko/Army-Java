@@ -1,14 +1,13 @@
 package Units;
 
 import Abilities.DefaultAbility;
+import Desk.*;
 import States.DefaultState;
 
-/**
- * Created by Igor on 13.09.2015.
- */
 public class Soldier extends Unit {
-    public Soldier(String name, int hitPoints, int damage) {
-        super(name, hitPoints, damage);
+    public Soldier(String name, int hitPoints, int damage, Desk desk, int positionX, int positionY) {
+        super(name, hitPoints, damage, desk, positionX, positionY);
+        this.shortName = new String("Slr");
         this.ability = new DefaultAbility(this);
         this.unitType = UnitType.SOLDIERT;
         currentState = new DefaultState(this);
