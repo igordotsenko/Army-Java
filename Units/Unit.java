@@ -26,6 +26,7 @@ public abstract class Unit implements Observer, Observable {
     protected int hitPoints;
     protected int hitPointsLimit;
     protected int damage;
+    protected int speed;
     protected UnitType unitType;
     protected boolean undead;
     protected Ability ability;
@@ -54,16 +55,25 @@ public abstract class Unit implements Observer, Observable {
                 throw new Units.UnitIsDeadException();
             }
         }
-    private void ensureIsNotSelfAttack(Unit enemy) throws SelfAttackException {
+    protected void ensureIsNotSelfAttack(Unit enemy) throws SelfAttackException {
             if ( this == enemy ) {
                 throw new SelfAttackException();
             }
         }
+    protected void ensureFieldIsEmpty(int x, int y) throws FieldIsOccupiedException {
+        if ( !desk.isEmptyField(x, y)) {
+            throw new FieldIsOccupiedException();
+        }
+    }
+    protected void ensureDistanceIsAcceptable(Point newPosition) throws ToFarException {
+        if ( position.distance(newPosition) > speed) {
+            throw new ToFarException();
+        }
+    }
 
     public final String getName() {
             return this.name;
         }
-
     public String getShortName() {
         return shortName;
     }
@@ -123,6 +133,17 @@ public abstract class Unit implements Observer, Observable {
         altState = newAltState;
     }
 
+    public void move(int newX, int newY) throws FieldIsOccupiedException, ToFarException {
+        Point newPosition = new Point(newX, newY);
+        if ( position.equals(newPosition) ) {
+            return;
+        }
+        ensureFieldIsEmpty(newX, newY);
+        ensureDistanceIsAcceptable(newPosition);
+        desk.removeUnit(this);
+        position = newPosition;
+        desk.placeUnit(this);
+    }
     public void changeAbility(Ability newAbility) {
             ability = newAbility;
         }
@@ -139,7 +160,6 @@ public abstract class Unit implements Observer, Observable {
             }
             enemy.ability.counterAttack(this);
         }
-
     public void takeDamage(int dmg) throws UnitIsDeadException {
             if ( dmg > hitPoints) {
                 hitPoints = 0;

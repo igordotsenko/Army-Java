@@ -6,8 +6,10 @@ public class Daemon extends Soldier {
     public Warlock master;
 
     public Daemon(Warlock master) {
-        super("Daemon", 100, 10);
+        super("Daemon", 100, 10, master.desk, 0, 0); // Update position placement
         this.master = master;
+        this.shortName = new String("Dmn");
+        this.speed = 1;
         unitType = UnitType.DAEMONT;
     }
 

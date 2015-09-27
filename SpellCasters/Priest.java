@@ -1,12 +1,13 @@
 package SpellCasters;
 
 import Abilities.*;
+import Desk.Desk;
 import States.*;
 
 public class Priest extends SpellCaster {
-    public Priest(String name, int hitPoints, int damage, int manaPoints) {
-        super(name, hitPoints, damage, manaPoints);
-        ability = new PriestAbility(this);
+    public Priest(String name, int hitPoints, int damage, int manaPoints, Desk desk, int positionX, int positionY) {
+        super(name, hitPoints, damage, manaPoints, desk, positionX, positionY);
+        this.shortName = new String("Pst");
         activeSpell = spellBook.get("Heal");
         unitType = UnitType.PRIESTT;
         currentState = new DefaultState(this);

@@ -1,11 +1,13 @@
 package SpellCasters;
 
 import Abilities.*;
+import Desk.Desk;
 import States.*;
 
 public class Wizard extends SpellCaster {
-    public Wizard(String name, int hitPoints, int damage, int manaPoints) {
-        super(name, hitPoints, damage, manaPoints);
+    public Wizard(String name, int hitPoints, int damage, int manaPoints, Desk desk, int positionX, int positionY) {
+        super(name, hitPoints, damage, manaPoints, desk, positionX, positionY);
+        this.shortName = new String("Wzr");
         ability = new BattleCasterAbility(this);
         activeSpell = spellBook.get("Fireball");
         unitType = UnitType.WIZARDT;

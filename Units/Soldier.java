@@ -8,6 +8,7 @@ public class Soldier extends Unit {
     public Soldier(String name, int hitPoints, int damage, Desk desk, int positionX, int positionY) {
         super(name, hitPoints, damage, desk, positionX, positionY);
         this.shortName = new String("Slr");
+        this.speed = 1;
         this.ability = new DefaultAbility(this);
         this.unitType = UnitType.SOLDIERT;
         currentState = new DefaultState(this);

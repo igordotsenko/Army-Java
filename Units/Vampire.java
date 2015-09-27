@@ -1,11 +1,14 @@
 package Units;
 
 import Abilities.VampireAbility;
+import Desk.Desk;
 import States.DefaultState;
 
 public class Vampire extends Unit{
-    public Vampire(String name, int hitPoints, int damage) {
-        super(name, hitPoints, damage);
+    public Vampire(String name, int hitPoints, int damage, Desk desk, int positionX, int positionY) {
+        super(name, hitPoints, damage, desk, positionX, positionY);
+        this.shortName = new String("Vmp");
+        this.speed = 2;
         ability = new VampireAbility(this);
         undead = true;
         unitType = UnitType.VAMPIRET;

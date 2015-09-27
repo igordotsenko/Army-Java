@@ -1,6 +1,8 @@
 package SpellCasters;
 
 import java.util.HashMap;
+
+import Desk.Desk;
 import Units.*;
 import Abilities.*;
 import Spells.*;
@@ -11,10 +13,9 @@ public abstract class SpellCaster extends Unit {
     protected HashMap<String, Spell> spellBook;
     protected Spell activeSpell;
 
-    public SpellCaster(String name, int hitPoints, int damage, int manaPoints) {
-        super(name, hitPoints, damage);
-        this.manaPoints = manaPoints;
-        this.manaPointsLimit = manaPoints;
+    public SpellCaster(String name, int hitPoints, int damage, int manaPoints, Desk desk, int positionX, int positionY) {
+        super(name, hitPoints, damage, desk, positionX, positionY);
+        this.speed = 1;
         ability = new BattleCasterAbility(this);
         spellBook = new HashMap<String, Spell>();
         addSpell(new Fireball());

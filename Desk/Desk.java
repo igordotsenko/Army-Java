@@ -19,11 +19,14 @@ public class Desk {
     public void placeUnit(Unit unit) {
         deskFields[unit.getPosition().getX()][unit.getPosition().getY()] = unit;
     }
+    public void removeUnit(Unit unit) {
+        deskFields[unit.getPosition().getX()][unit.getPosition().getY()] = null;
+    }
     private String printMerge() {
         String out = new String();
         StringBuffer buffer = new StringBuffer();
 
-        for ( int i = 0; i < deskSize; i++ ) {
+        for ( int i = deskSize - 1; i >= 0; i--) {
             buffer.append("+---");
         }
         buffer.append("+\n");
@@ -37,7 +40,7 @@ public class Desk {
         StringBuffer buffer = new StringBuffer();
 
         buffer.append("|");
-        for ( int vertical = 0; vertical < deskSize; vertical++ ) {
+        for ( int vertical = 0; vertical < deskSize; vertical++) {
             if ( isEmptyField(horizontal, vertical)) {
                 buffer.append("   ");
             } else {
@@ -57,7 +60,7 @@ public class Desk {
         StringBuffer buffer = new StringBuffer();
 
         buffer.append(printMerge());
-        for ( int line = 0; line < deskSize; line++ ) {
+        for ( int line = deskSize - 1; line >= 0; line--) {
             buffer.append(printLine(line));
             buffer.append(printMerge());
         }

@@ -1,5 +1,6 @@
 package SpellCasters;
 
+import Desk.Desk;
 import Units.*;
 import Abilities.*;
 import States.*;
@@ -8,8 +9,9 @@ public class Warlock extends SpellCaster {
     private Daemon slave;
     public static int daemonCost = 20;
 
-    public Warlock(String name, int hitPoints, int damage, int manaPoints) {
-        super(name, hitPoints, damage, manaPoints);
+    public Warlock(String name, int hitPoints, int damage, int manaPoints, Desk desk, int positionX, int positionY) {
+        super(name, hitPoints, damage, manaPoints, desk, positionX, positionY);
+        this.shortName = new String("Wrl");
         ability = new BattleCasterAbility(this);
         activeSpell = spellBook.get("Fireball");
         slave = null;
