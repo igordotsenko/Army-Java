@@ -1,27 +1,38 @@
 package Desk;
 
+import Exceptions.LocationIsNotFreeException;
 import Units.*;
 
 public class Desk {
     public static final int deskSize = 8;
-    public Unit[][] deskFields;
+    public Location[][] deskFields;
 
     public Desk() {
-        deskFields = new Unit[deskSize][deskSize];
+        deskFields = new Location[deskSize][deskSize];
+
+        for( int x = 0; x < deskSize; x++ ) {
+            for( int y = 0; y < deskSize; y++ ) {
+                deskFields[x][y] = new Location(new Point(x, y));
+            }
+        }
+    }
+    public Location getLocation(int x, int y) {
+        return deskFields[x][y];
     }
 
-    public boolean isEmptyField(int x, int y) {
-        if ( deskFields[x][y] == null ) {
-            return true;
-        }
-        return false;
+//    public boolean isEmptyField(int x, int y) {
+//        if ( deskFields[x][y] == null ) {
+//            return true;
+//        }
+//        return false;
+//    }
+    public Location placeUnit(Unit unit, int x, int y) throws LocationIsNotFreeException {
+        deskFields[x][y].setUnit(unit);
+        return deskFields[x][y];
     }
-    public void placeUnit(Unit unit) {
-        deskFields[unit.getPosition().getX()][unit.getPosition().getY()] = unit;
-    }
-    public void removeUnit(Unit unit) {
-        deskFields[unit.getPosition().getX()][unit.getPosition().getY()] = null;
-    }
+//    public void removeUnit(Unit unit) {
+//        deskFields[unit.getPosition().getX()][unit.getPosition().getY()] = null;
+//    }
     private String printMerge() {
         String out = new String();
         StringBuffer buffer = new StringBuffer();
@@ -41,10 +52,10 @@ public class Desk {
 
         buffer.append("|");
         for ( int vertical = 0; vertical < deskSize; vertical++) {
-            if ( isEmptyField(horizontal, vertical)) {
+            if ( deskFields[horizontal][vertical].isFreeForUnit() ) {
                 buffer.append("   ");
             } else {
-                Unit placedUnit = deskFields[horizontal][vertical];
+                Unit placedUnit = deskFields[horizontal][vertical].getUnit();
                 buffer.append(placedUnit.getShortName());
             }
             buffer.append("|");

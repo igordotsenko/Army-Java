@@ -3,6 +3,7 @@ package SpellCasters;
 import java.util.HashMap;
 
 import Desk.Desk;
+import Exceptions.*;
 import Units.*;
 import Abilities.*;
 import Spells.*;
@@ -13,7 +14,7 @@ public abstract class SpellCaster extends Unit {
     protected HashMap<String, Spell> spellBook;
     protected Spell activeSpell;
 
-    public SpellCaster(String name, int hitPoints, int damage, int manaPoints, Desk desk, int positionX, int positionY) {
+    public SpellCaster(String name, int hitPoints, int damage, int manaPoints, Desk desk, int positionX, int positionY) throws LocationIsNotFreeException {
         super(name, hitPoints, damage, desk, positionX, positionY);
         this.speed = 1;
         ability = new BattleCasterAbility(this);

@@ -2,10 +2,11 @@ package Units;
 
 import Abilities.DefaultAbility;
 import Desk.*;
+import Exceptions.LocationIsNotFreeException;
 import States.DefaultState;
 
 public class Soldier extends Unit {
-    public Soldier(String name, int hitPoints, int damage, Desk desk, int positionX, int positionY) {
+    public Soldier(String name, int hitPoints, int damage, Desk desk, int positionX, int positionY) throws LocationIsNotFreeException {
         super(name, hitPoints, damage, desk, positionX, positionY);
         this.shortName = new String("Slr");
         this.speed = 1;

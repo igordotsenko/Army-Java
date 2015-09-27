@@ -2,11 +2,12 @@ package SpellCasters;
 
 import Abilities.Ability;
 import Desk.Desk;
+import Exceptions.LocationIsNotFreeException;
 import States.*;
 import Units.*;
 
 public class Necromancer extends SpellCaster {
-    public Necromancer(String name, int hitPoints, int damage, int manaPoints, Desk desk, int positionX, int positionY) {
+    public Necromancer(String name, int hitPoints, int damage, int manaPoints, Desk desk, int positionX, int positionY) throws LocationIsNotFreeException {
         super(name, hitPoints, damage, manaPoints, desk, positionX, positionY);
         this.shortName = new String("Ncr");
         activeSpell = spellBook.get("Fireball");

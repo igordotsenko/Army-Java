@@ -1,11 +1,12 @@
 package Units;
 
+import Exceptions.LocationIsNotFreeException;
 import SpellCasters.*;
 
 public class Daemon extends Soldier {
     public Warlock master;
 
-    public Daemon(Warlock master) {
+    public Daemon(Warlock master) throws LocationIsNotFreeException {
         super("Daemon", 100, 10, master.desk, 0, 0); // Update position placement
         this.master = master;
         this.shortName = new String("Dmn");

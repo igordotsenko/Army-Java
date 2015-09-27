@@ -1,5 +1,6 @@
 package Units;
 
+import Exceptions.*;
 import Desk.*;
 import Abilities.Ability;
 import States.State;
@@ -35,9 +36,9 @@ public abstract class Unit implements Observer, Observable {
     protected HashSet<Unit> observers;
     protected HashSet<Unit> observables;
     protected Desk desk;
-    protected Point position;
+    protected Location position;
 
-    public Unit(String name, int hitPoints, int damage, Desk desk, int positionX, int positionY) {
+    public Unit(String name, int hitPoints, int damage, Desk desk, int positionX, int positionY) throws LocationIsNotFreeException {
         this.name = name;
         this.hitPoints = hitPoints;
         this.hitPointsLimit = hitPoints;
@@ -46,8 +47,7 @@ public abstract class Unit implements Observer, Observable {
         this.observers = new HashSet<>();
         this.observables = new HashSet<>();
         this.desk = desk;
-        this.position = new Point(positionX, positionY);
-        desk.placeUnit(this);
+        this.position = desk.placeUnit(this, positionX, positionY);
     }
 
     protected void ensureIsAlive() throws UnitIsDeadException {
@@ -60,16 +60,16 @@ public abstract class Unit implements Observer, Observable {
                 throw new SelfAttackException();
             }
         }
-    protected void ensureFieldIsEmpty(int x, int y) throws FieldIsOccupiedException {
-        if ( !desk.isEmptyField(x, y)) {
-            throw new FieldIsOccupiedException();
-        }
-    }
-    protected void ensureDistanceIsAcceptable(Point newPosition) throws ToFarException {
-        if ( position.distance(newPosition) > speed) {
-            throw new ToFarException();
-        }
-    }
+//    protected void ensureFieldIsEmpty(int x, int y) throws FieldIsOccupiedException {
+//        if ( !desk.isEmptyField(x, y)) {
+//            throw new FieldIsOccupiedException();
+//        }
+//    }
+//    protected void ensureDistanceIsAcceptable(Point newPosition) throws ToFarException {
+//        if ( position.distance(newPosition) > speed) {
+//            throw new ToFarException();
+//        }
+//    }
 
     public final String getName() {
             return this.name;
@@ -104,7 +104,7 @@ public abstract class Unit implements Observer, Observable {
     public final HashSet<Unit> getObservables() {
             return observables;
         }
-    public Point getPosition() {
+    public Location getPosition() {
             return position;
         }
 
@@ -133,17 +133,17 @@ public abstract class Unit implements Observer, Observable {
         altState = newAltState;
     }
 
-    public void move(int newX, int newY) throws FieldIsOccupiedException, ToFarException {
-        Point newPosition = new Point(newX, newY);
-        if ( position.equals(newPosition) ) {
-            return;
-        }
-        ensureFieldIsEmpty(newX, newY);
-        ensureDistanceIsAcceptable(newPosition);
-        desk.removeUnit(this);
-        position = newPosition;
-        desk.placeUnit(this);
-    }
+//    public void move(int newX, int newY) throws FieldIsOccupiedException, ToFarException {
+//        Point newPosition = new Point(newX, newY);
+//        if ( position.equals(newPosition) ) {
+//            return;
+//        }
+//        ensureFieldIsEmpty(newX, newY);
+//        ensureDistanceIsAcceptable(newPosition);
+//        desk.removeUnit(this);
+//        position = newPosition;
+//        desk.placeUnit(this);
+//    }
     public void changeAbility(Ability newAbility) {
             ability = newAbility;
         }

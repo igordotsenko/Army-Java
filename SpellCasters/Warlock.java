@@ -1,6 +1,7 @@
 package SpellCasters;
 
 import Desk.Desk;
+import Exceptions.LocationIsNotFreeException;
 import Units.*;
 import Abilities.*;
 import States.*;
@@ -9,7 +10,7 @@ public class Warlock extends SpellCaster {
     private Daemon slave;
     public static int daemonCost = 20;
 
-    public Warlock(String name, int hitPoints, int damage, int manaPoints, Desk desk, int positionX, int positionY) {
+    public Warlock(String name, int hitPoints, int damage, int manaPoints, Desk desk, int positionX, int positionY) throws LocationIsNotFreeException {
         super(name, hitPoints, damage, manaPoints, desk, positionX, positionY);
         this.shortName = new String("Wrl");
         ability = new BattleCasterAbility(this);
@@ -24,7 +25,7 @@ public class Warlock extends SpellCaster {
         return slave;
     }
 
-    public Daemon summonSlave() throws SlaveAlreadySummonedException, NotEnoughManaException {
+    public Daemon summonSlave() throws SlaveAlreadySummonedException, NotEnoughManaException, LocationIsNotFreeException {
         if ( slave != null ) {
             throw new SlaveAlreadySummonedException();
         }
