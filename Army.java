@@ -6,7 +6,7 @@ import Desk.*;
 public class Army  {
 
     public static void main(String[] args) throws UnitIsDeadException, SelfAttackException, MasterAttackException, FieldIsOccupiedException, ToFarException, LocationIsNotFreeException, DiagonalMoveException, SlaveAlreadySummonedException, NotEnoughManaException {
-        Desk desk = new Desk();
+        Desk desk = new Desk(12);
         Soldier soldier = new Soldier("Soldier", 50, 10, desk, 0, 0);
         Rogue rogue = new Rogue("Rogue", 50, 10, desk, 1, 0);
         Berserker berserker = new Berserker("Berserker", 50, 15, desk, 2, 0);

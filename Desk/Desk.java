@@ -4,10 +4,21 @@ import Exceptions.LocationIsNotFreeException;
 import Units.*;
 
 public class Desk {
-    public static final int deskSize = 8;
+    public int deskSize;
     public Location[][] deskFields;
 
     public Desk() {
+        deskSize = 8;
+        deskFields = new Location[deskSize][deskSize];
+
+        for( int x = 0; x < deskSize; x++ ) {
+            for( int y = 0; y < deskSize; y++ ) {
+                deskFields[x][y] = new Location(new Point(x, y));
+            }
+        }
+    }
+    public Desk(int deskSize) {
+        this.deskSize = deskSize;
         deskFields = new Location[deskSize][deskSize];
 
         for( int x = 0; x < deskSize; x++ ) {
