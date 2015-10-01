@@ -1,7 +1,7 @@
 package Abilities;
 
 import Units.Unit;
-import Units.UnitIsDeadException;
+import Exceptions.UnitIsDeadException;
 
 public class RogueAbility extends Ability{
     public RogueAbility(Unit actionUnit) {

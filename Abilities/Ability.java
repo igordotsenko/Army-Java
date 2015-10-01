@@ -2,8 +2,7 @@ package Abilities;
 
 import Units.Unit;
 import Spells.Spell;
-import Units.UnitIsDeadException;
-import States.*;
+import Exceptions.UnitIsDeadException;
 
 public abstract class Ability {
     Unit actionUnit;

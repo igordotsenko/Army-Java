@@ -1,11 +1,11 @@
-import Exceptions.LocationIsNotFreeException;
+import Exceptions.*;
 import SpellCasters.*;
 import Units.*;
 import Desk.*;
 
 public class Army  {
 
-    public static void main(String[] args) throws UnitIsDeadException, SelfAttackException, MasterAttackException, FieldIsOccupiedException, ToFarException, LocationIsNotFreeException {
+    public static void main(String[] args) throws UnitIsDeadException, SelfAttackException, MasterAttackException, FieldIsOccupiedException, ToFarException, LocationIsNotFreeException, DiagonalMoveException {
         Desk desk = new Desk();
         Soldier soldier = new Soldier("Soldier", 50, 10, desk, 0, 0);
 //        Rogue rogue = new Rogue("Rogue", 50, 10);
@@ -18,6 +18,8 @@ public class Army  {
 ////        Necromancer necr = new Necromancer("Necromancer", 50, 10, 50);
 //
 //
+        System.out.println(desk.toString());
+        soldier.move(0, 2);
         System.out.println(desk.toString());
 
 //

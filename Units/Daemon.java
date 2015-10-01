@@ -1,6 +1,9 @@
 package Units;
 
 import Exceptions.LocationIsNotFreeException;
+import Exceptions.MasterAttackException;
+import Exceptions.SelfAttackException;
+import Exceptions.UnitIsDeadException;
 import SpellCasters.*;
 
 public class Daemon extends Soldier {

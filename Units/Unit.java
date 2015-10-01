@@ -6,6 +6,9 @@ import Abilities.Ability;
 import States.State;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.ArrayList;
+import java.lang.Integer;
+import java.util.ListIterator;
 
 public abstract class Unit implements Observer, Observable {
 
@@ -52,7 +55,7 @@ public abstract class Unit implements Observer, Observable {
 
     protected void ensureIsAlive() throws UnitIsDeadException {
             if ( hitPoints == 0 ) {
-                throw new Units.UnitIsDeadException();
+                throw new UnitIsDeadException();
             }
         }
     protected void ensureIsNotSelfAttack(Unit enemy) throws SelfAttackException {
@@ -65,11 +68,17 @@ public abstract class Unit implements Observer, Observable {
 //            throw new FieldIsOccupiedException();
 //        }
 //    }
-//    protected void ensureDistanceIsAcceptable(Point newPosition) throws ToFarException {
-//        if ( position.distance(newPosition) > speed) {
-//            throw new ToFarException();
-//        }
-//    }
+    protected void ensureDistanceIsAcceptable(Point destination) throws ToFarException, DiagonalMoveException {
+        int horizontalSteps = destination.getX() - position.getCoordinates().getX();
+        int vericalSteps = destination.getY() - position.getCoordinates().getY();
+
+        if ( horizontalSteps != 0 && vericalSteps != 0 ) {
+            throw new DiagonalMoveException();
+        }
+        if ( destination.distance(position.getCoordinates()) > speed) {
+            throw new ToFarException();
+        }
+    }
 
     public final String getName() {
             return this.name;
@@ -133,17 +142,63 @@ public abstract class Unit implements Observer, Observable {
         altState = newAltState;
     }
 
-//    public void move(int newX, int newY) throws FieldIsOccupiedException, ToFarException {
-//        Point newPosition = new Point(newX, newY);
-//        if ( position.equals(newPosition) ) {
-//            return;
-//        }
+    public void move(int newX, int newY) throws FieldIsOccupiedException, ToFarException, DiagonalMoveException, LocationIsNotFreeException {
+        Point destination = new Point(newX, newY);
+        ArrayList<Location> path;
+        ListIterator<Location> it;
+
+        if ( destination.equals(position.getCoordinates()) ) {
+            return;
+        }
+        ensureDistanceIsAcceptable(destination);
+        path = specifyPath(destination);
+        it = path.listIterator(path.size());
+        Location checkedLocation = null;
+        for ( ; it.hasPrevious(); checkedLocation = it.previous() ); // later here will be added checking for location's bonuses, extra damages etc.
+        if (checkedLocation != null) {
+            position.removeUnit();
+            checkedLocation.setUnit(this);
+            position = checkedLocation;
+        }
+
+
 //        ensureFieldIsEmpty(newX, newY);
-//        ensureDistanceIsAcceptable(newPosition);
 //        desk.removeUnit(this);
 //        position = newPosition;
 //        desk.placeUnit(this);
-//    }
+    }
+    public ArrayList<Location> specifyPath(Point destination) throws LocationIsNotFreeException{
+        ArrayList<Location> path = new ArrayList<>();
+        int horizontalSteps = destination.getX() - position.getCoordinates().getX();
+        int vericalSteps = destination.getY() - position.getCoordinates().getY();
+
+        for ( int step = Integer.signum(horizontalSteps); horizontalSteps == 0; horizontalSteps -= step ) {
+            System.out.println("Horizontal path started");
+            int checkedX = position.getCoordinates().getX() + horizontalSteps;
+            int checkedY = position.getCoordinates().getY();
+            Location checkedLocation = desk.deskFields[checkedX][checkedY];
+
+            if ( checkedLocation.isFreeForUnit() ) {
+                path.add(checkedLocation);
+            } else {
+                throw new LocationIsNotFreeException(checkedLocation.getCoordinates());
+            }
+        } // horizontal path
+        for ( int step = Integer.signum(vericalSteps); vericalSteps == 0; vericalSteps -= step ) {
+            System.out.println("Vertical path started");
+            int checkedX = position.getCoordinates().getX();
+            int checkedY = position.getCoordinates().getY() + vericalSteps;
+            Location checkedLocation = desk.deskFields[checkedX][checkedY];
+
+            if ( checkedLocation.isFreeForUnit() ) {
+                path.add(checkedLocation);
+            } else {
+                throw new LocationIsNotFreeException(checkedLocation.getCoordinates());
+            }
+        } // vertical path
+
+        return path;
+    } // this method is needed for future, when locations will be able to have additional features as bonuses, extra damages etc.
     public void changeAbility(Ability newAbility) {
             ability = newAbility;
         }

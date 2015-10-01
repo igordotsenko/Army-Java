@@ -37,6 +37,7 @@ public class Desk {
         String out = new String();
         StringBuffer buffer = new StringBuffer();
 
+        buffer.append("    "); // 4 spaces to move merge to the same space as vertical line
         for ( int i = deskSize - 1; i >= 0; i--) {
             buffer.append("+---");
         }
@@ -65,6 +66,18 @@ public class Desk {
         out = buffer.toString();
         return out;
     }
+    private String printVerticalAxis() {
+        String out = new String();
+        StringBuffer buffer = new StringBuffer();
+
+        buffer.append("   "); // 3 spaces to move merge to the same space as vertical line
+        for ( int verticalCoordinate = 0; verticalCoordinate < deskSize; verticalCoordinate++) {
+            buffer.append(String.format("%4d", verticalCoordinate));
+        }
+
+        out = buffer.toString();
+        return out;
+    }
     @Override
     public String toString() {
         String out = new String();
@@ -72,9 +85,11 @@ public class Desk {
 
         buffer.append(printMerge());
         for ( int line = deskSize - 1; line >= 0; line--) {
+            buffer.append(String.format("%3d ", line));
             buffer.append(printLine(line));
             buffer.append(printMerge());
         }
+        buffer.append(printVerticalAxis());
 
         out = buffer.toString();
         return out;

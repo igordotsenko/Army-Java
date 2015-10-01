@@ -2,6 +2,8 @@ package SpellCasters;
 
 import Desk.Desk;
 import Exceptions.LocationIsNotFreeException;
+import Exceptions.NotEnoughManaException;
+import Exceptions.SlaveAlreadySummonedException;
 import Units.*;
 import Abilities.*;
 import States.*;

@@ -2,7 +2,7 @@ package Abilities;
 
 import Units.Unit;
 import Spells.*;
-import Units.UnitIsDeadException;
+import Exceptions.UnitIsDeadException;
 
 public class PriestAbility extends Ability {
     public PriestAbility(Unit actionUnit) {

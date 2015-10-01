@@ -1,7 +1,7 @@
 package Abilities;
 
 import Units.Unit;
-import Units.UnitIsDeadException;
+import Exceptions.UnitIsDeadException;
 
 import java.util.Random;
 

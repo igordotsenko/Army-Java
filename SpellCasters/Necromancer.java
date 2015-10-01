@@ -2,7 +2,7 @@ package SpellCasters;
 
 import Abilities.Ability;
 import Desk.Desk;
-import Exceptions.LocationIsNotFreeException;
+import Exceptions.*;
 import States.*;
 import Units.*;
 

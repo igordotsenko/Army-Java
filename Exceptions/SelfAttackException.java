@@ -1,4 +1,4 @@
-package Units;
+package Exceptions;
 
 /**
  * Created by Igor on 13.09.2015.

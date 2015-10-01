@@ -1,5 +1,6 @@
 package Abilities;
 
+import Exceptions.UnitIsDeadException;
 import Spells.*;
 import Units.*;
 

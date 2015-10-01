@@ -4,7 +4,7 @@ import java.util.Random;
 import Units.Unit;
 import States.WolfState;
 import States.State;
-import Units.UnitIsDeadException;
+import Exceptions.UnitIsDeadException;
 
 public class WerewolfAbility extends Ability {
     Random random = new Random();

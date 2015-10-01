@@ -1,3 +1,3 @@
-package Units;
+package Exceptions;
 
 public class DiagonalMoveException extends Exception {}
