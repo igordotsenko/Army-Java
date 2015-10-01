@@ -47,16 +47,16 @@ public class Desk {
         return out;
     }
     // desk.printLine(int horizontal) - prints horizontal line
-    private String printLine(int horizontal) {
+    private String printLine(int y) {
         String out = new String();
         StringBuffer buffer = new StringBuffer();
 
         buffer.append("|");
-        for ( int vertical = 0; vertical < deskSize; vertical++) {
-            if ( deskFields[horizontal][vertical].isFreeForUnit() ) {
+        for ( int x = 0; x < deskSize; x++) {
+            if ( deskFields[x][y].isFreeForUnit() ) {
                 buffer.append("   ");
             } else {
-                Unit placedUnit = deskFields[horizontal][vertical].getUnit();
+                Unit placedUnit = deskFields[x][y].getUnit();
                 buffer.append(placedUnit.getShortName());
             }
             buffer.append("|");

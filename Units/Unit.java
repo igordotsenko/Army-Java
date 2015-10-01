@@ -170,10 +170,9 @@ public abstract class Unit implements Observer, Observable {
     public ArrayList<Location> specifyPath(Point destination) throws LocationIsNotFreeException{
         ArrayList<Location> path = new ArrayList<>();
         int horizontalSteps = destination.getX() - position.getCoordinates().getX();
-        int vericalSteps = destination.getY() - position.getCoordinates().getY();
+        int verticalSteps = destination.getY() - position.getCoordinates().getY();
 
-        for ( int step = Integer.signum(horizontalSteps); horizontalSteps == 0; horizontalSteps -= step ) {
-            System.out.println("Horizontal path started");
+        for ( int step = Integer.signum(horizontalSteps); horizontalSteps != 0; horizontalSteps -= step ) {
             int checkedX = position.getCoordinates().getX() + horizontalSteps;
             int checkedY = position.getCoordinates().getY();
             Location checkedLocation = desk.deskFields[checkedX][checkedY];
@@ -184,10 +183,9 @@ public abstract class Unit implements Observer, Observable {
                 throw new LocationIsNotFreeException(checkedLocation.getCoordinates());
             }
         } // horizontal path
-        for ( int step = Integer.signum(vericalSteps); vericalSteps == 0; vericalSteps -= step ) {
-            System.out.println("Vertical path started");
+        for ( int step = Integer.signum(verticalSteps); verticalSteps != 0; verticalSteps -= step ) {
             int checkedX = position.getCoordinates().getX();
-            int checkedY = position.getCoordinates().getY() + vericalSteps;
+            int checkedY = position.getCoordinates().getY() + verticalSteps;
             Location checkedLocation = desk.deskFields[checkedX][checkedY];
 
             if ( checkedLocation.isFreeForUnit() ) {
