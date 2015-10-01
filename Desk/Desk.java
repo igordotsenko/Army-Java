@@ -8,21 +8,21 @@ public class Desk {
     public Location[][] deskFields;
 
     public Desk() {
-        deskSize = 8;
+        deskSize = 9;
         deskFields = new Location[deskSize][deskSize];
 
-        for( int x = 0; x < deskSize; x++ ) {
-            for( int y = 0; y < deskSize; y++ ) {
+        for( int x = 1; x < deskSize; x++ ) {
+            for( int y = 1; y < deskSize; y++ ) {
                 deskFields[x][y] = new Location(new Point(x, y));
             }
         }
     }
     public Desk(int deskSize) {
-        this.deskSize = deskSize;
-        deskFields = new Location[deskSize][deskSize];
+        this.deskSize = deskSize + 1;
+        deskFields = new Location[this.deskSize][this.deskSize];
 
-        for( int x = 0; x < deskSize; x++ ) {
-            for( int y = 0; y < deskSize; y++ ) {
+        for( int x = 1; x < this.deskSize; x++ ) {
+            for( int y = 1; y < this.deskSize; y++ ) {
                 deskFields[x][y] = new Location(new Point(x, y));
             }
         }
@@ -49,7 +49,7 @@ public class Desk {
         StringBuffer buffer = new StringBuffer();
 
         buffer.append("    "); // 4 spaces to move merge to the same space as vertical line
-        for ( int i = deskSize - 1; i >= 0; i--) {
+        for ( int i = deskSize - 1; i > 0; i--) {
             buffer.append("+---");
         }
         buffer.append("+\n");
@@ -63,7 +63,7 @@ public class Desk {
         StringBuffer buffer = new StringBuffer();
 
         buffer.append("|");
-        for ( int x = 0; x < deskSize; x++) {
+        for ( int x = 1; x < deskSize; x++) {
             if ( deskFields[x][y].isFreeForUnit() ) {
                 buffer.append("   ");
             } else {
@@ -77,12 +77,12 @@ public class Desk {
         out = buffer.toString();
         return out;
     }
-    private String printVerticalAxis() {
+    private String printHorizontalAxis() {
         String out = new String();
         StringBuffer buffer = new StringBuffer();
 
         buffer.append("   "); // 3 spaces to move merge to the same space as vertical line
-        for ( int verticalCoordinate = 0; verticalCoordinate < deskSize; verticalCoordinate++) {
+        for ( int verticalCoordinate = 1; verticalCoordinate < deskSize; verticalCoordinate++) {
             buffer.append(String.format("%4d", verticalCoordinate));
         }
 
@@ -95,12 +95,12 @@ public class Desk {
         StringBuffer buffer = new StringBuffer();
 
         buffer.append(printMerge());
-        for ( int line = deskSize - 1; line >= 0; line--) {
+        for ( int line = deskSize - 1; line > 0; line--) {
             buffer.append(String.format("%3d ", line));
             buffer.append(printLine(line));
             buffer.append(printMerge());
         }
-        buffer.append(printVerticalAxis());
+        buffer.append(printHorizontalAxis());
 
         out = buffer.toString();
         return out;
