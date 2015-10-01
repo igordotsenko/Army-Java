@@ -16,6 +16,8 @@ public abstract class SpellCaster extends Unit {
 
     public SpellCaster(String name, int hitPoints, int damage, int manaPoints, Desk desk, int positionX, int positionY) throws LocationIsNotFreeException {
         super(name, hitPoints, damage, desk, positionX, positionY);
+        this.manaPoints = manaPoints;
+        this.manaPointsLimit = manaPoints;
         this.speed = 1;
         ability = new BattleCasterAbility(this);
         spellBook = new HashMap<String, Spell>();

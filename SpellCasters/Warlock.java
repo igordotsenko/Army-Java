@@ -27,14 +27,14 @@ public class Warlock extends SpellCaster {
         return slave;
     }
 
-    public Daemon summonSlave() throws SlaveAlreadySummonedException, NotEnoughManaException, LocationIsNotFreeException {
+    public Daemon summonSlave(int x, int y) throws SlaveAlreadySummonedException, NotEnoughManaException, LocationIsNotFreeException {
         if ( slave != null ) {
             throw new SlaveAlreadySummonedException();
         }
         if ( manaPoints < daemonCost ) {
             throw new NotEnoughManaException();
         }
-        slave = new Daemon(this);
+        slave = new Daemon(this, x, y);
         manaPoints -= daemonCost;
         return slave;
     }
