@@ -7,7 +7,7 @@ import States.*;
 import Units.*;
 
 public class Necromancer extends SpellCaster {
-    public Necromancer(String name, int hitPoints, int damage, int manaPoints, Desk desk, int positionX, int positionY) throws LocationIsNotFreeException {
+    public Necromancer(String name, int hitPoints, int damage, int manaPoints, Desk desk, int positionX, int positionY) throws LocationIsNotFreeException, OutOfTheDeskException {
         super(name, hitPoints, damage, manaPoints, desk, positionX, positionY);
         this.shortName = new String("Ncr");
         activeSpell = spellBook.get("Fireball");
@@ -24,7 +24,7 @@ public class Necromancer extends SpellCaster {
         super.changeAbility(newAbility);
     }
     @Override
-    public void castSpell(Unit target) throws UnitIsDeadException, NotEnoughManaException {
+    public void castSpell(Unit target) throws UnitIsDeadException, NotEnoughManaException, ToFarException {
         super.castSpell(target);
         addObservable(target);
     }

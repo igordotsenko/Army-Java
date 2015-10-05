@@ -1,6 +1,6 @@
 package Desk;
 
-import Exceptions.LocationIsNotFreeException;
+import Exceptions.*;
 import Units.*;
 
 public class Desk {
@@ -8,7 +8,7 @@ public class Desk {
     public Location[][] deskFields;
 
     public Desk() {
-        deskSize = 9;
+        deskSize = 9; // 8 available point in one line
         deskFields = new Location[deskSize][deskSize];
 
         for( int x = 1; x < deskSize; x++ ) {
@@ -18,7 +18,7 @@ public class Desk {
         }
     }
     public Desk(int deskSize) {
-        this.deskSize = deskSize + 1;
+        this.deskSize = deskSize + 1; // deskSize available point in one line
         deskFields = new Location[this.deskSize][this.deskSize];
 
         for( int x = 1; x < this.deskSize; x++ ) {
@@ -37,7 +37,13 @@ public class Desk {
 //        }
 //        return false;
 //    }
-    public Location placeUnit(Unit unit, int x, int y) throws LocationIsNotFreeException {
+    protected void ensurePointIsOnTheDesk(int x, int y) throws OutOfTheDeskException {
+        if ( x == 0 || y == 0 || x >= deskSize || y >= deskSize) {
+            throw new OutOfTheDeskException();
+        }
+    }
+    public Location placeUnit(Unit unit, int x, int y) throws LocationIsNotFreeException, OutOfTheDeskException, OutOfTheDeskException {
+        ensurePointIsOnTheDesk(x, y);
         deskFields[x][y].setUnit(unit);
         return deskFields[x][y];
     }

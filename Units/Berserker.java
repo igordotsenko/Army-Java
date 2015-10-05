@@ -7,7 +7,7 @@ import Abilities.BerserkerAbility;
 
 
 public class Berserker extends Unit {
-    public Berserker(String name, int hitPoints, int damage, Desk desk, int positionX, int positionY) throws LocationIsNotFreeException {
+    public Berserker(String name, int hitPoints, int damage, Desk desk, int positionX, int positionY) throws LocationIsNotFreeException, Exceptions.OutOfTheDeskException {
         super(name, hitPoints, damage, desk, positionX, positionY);
         this.shortName = new String("Brs");
         this.speed = 2;

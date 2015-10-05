@@ -6,7 +6,7 @@ import Exceptions.LocationIsNotFreeException;
 import States.*;
 
 public class Wizard extends SpellCaster {
-    public Wizard(String name, int hitPoints, int damage, int manaPoints, Desk desk, int positionX, int positionY) throws LocationIsNotFreeException {
+    public Wizard(String name, int hitPoints, int damage, int manaPoints, Desk desk, int positionX, int positionY) throws LocationIsNotFreeException, Exceptions.OutOfTheDeskException {
         super(name, hitPoints, damage, manaPoints, desk, positionX, positionY);
         this.shortName = new String("Wzr");
         ability = new BattleCasterAbility(this);

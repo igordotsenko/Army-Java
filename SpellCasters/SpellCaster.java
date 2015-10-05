@@ -14,7 +14,7 @@ public abstract class SpellCaster extends Unit {
     protected HashMap<String, Spell> spellBook;
     protected Spell activeSpell;
 
-    public SpellCaster(String name, int hitPoints, int damage, int manaPoints, Desk desk, int positionX, int positionY) throws LocationIsNotFreeException {
+    public SpellCaster(String name, int hitPoints, int damage, int manaPoints, Desk desk, int positionX, int positionY) throws LocationIsNotFreeException, OutOfTheDeskException, OutOfTheDeskException {
         super(name, hitPoints, damage, desk, positionX, positionY);
         this.manaPoints = manaPoints;
         this.manaPointsLimit = manaPoints;
@@ -45,8 +45,9 @@ public abstract class SpellCaster extends Unit {
 
         this.manaPoints = newManaPoints;
     }
-    public void castSpell(Unit target) throws UnitIsDeadException, NotEnoughManaException {
+    public void castSpell(Unit target) throws UnitIsDeadException, NotEnoughManaException, ToFarException {
         ensureIsAlive();
+        super.ensureDistanceIsAcceptable(target.getPosition().getCoordinates(), activeSpell.getActionRadius());
         if ( manaPoints < activeSpell.getCost() ) {
             throw new NotEnoughManaException();
         }

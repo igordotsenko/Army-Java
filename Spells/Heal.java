@@ -5,6 +5,7 @@ public class Heal extends Spell {
         name = "Heal";
         actionPoints = 15;
         cost = 10;
+        actionRadius = 4;
         battleSpell = false;
     }
 }

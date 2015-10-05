@@ -12,7 +12,7 @@ public class Warlock extends SpellCaster {
     private Daemon slave;
     public static int daemonCost = 20;
 
-    public Warlock(String name, int hitPoints, int damage, int manaPoints, Desk desk, int positionX, int positionY) throws LocationIsNotFreeException {
+    public Warlock(String name, int hitPoints, int damage, int manaPoints, Desk desk, int positionX, int positionY) throws LocationIsNotFreeException, Exceptions.OutOfTheDeskException {
         super(name, hitPoints, damage, manaPoints, desk, positionX, positionY);
         this.shortName = new String("Wrl");
         ability = new BattleCasterAbility(this);
@@ -27,7 +27,7 @@ public class Warlock extends SpellCaster {
         return slave;
     }
 
-    public Daemon summonSlave(int x, int y) throws SlaveAlreadySummonedException, NotEnoughManaException, LocationIsNotFreeException {
+    public Daemon summonSlave(int x, int y) throws SlaveAlreadySummonedException, NotEnoughManaException, LocationIsNotFreeException, Exceptions.OutOfTheDeskException {
         if ( slave != null ) {
             throw new SlaveAlreadySummonedException();
         }

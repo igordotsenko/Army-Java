@@ -30,6 +30,7 @@ public abstract class Unit implements Observer, Observable {
     protected int hitPoints;
     protected int hitPointsLimit;
     protected int damage;
+    protected int attackRadius;
     protected int speed;
     protected UnitType unitType;
     protected boolean undead;
@@ -41,11 +42,12 @@ public abstract class Unit implements Observer, Observable {
     protected Desk desk;
     protected Location position;
 
-    public Unit(String name, int hitPoints, int damage, Desk desk, int positionX, int positionY) throws LocationIsNotFreeException {
+    public Unit(String name, int hitPoints, int damage, Desk desk, int positionX, int positionY) throws LocationIsNotFreeException, OutOfTheDeskException, OutOfTheDeskException {
         this.name = name;
         this.hitPoints = hitPoints;
         this.hitPointsLimit = hitPoints;
         this.damage = damage;
+        this.attackRadius = 1;
         this.undead = false;
         this.observers = new HashSet<>();
         this.observables = new HashSet<>();
@@ -68,14 +70,16 @@ public abstract class Unit implements Observer, Observable {
 //            throw new FieldIsOccupiedException();
 //        }
 //    }
-    protected void ensureDistanceIsAcceptable(Point destination) throws ToFarException, DiagonalMoveException {
+    protected void ensureIsNotDiagonalMove(Point destination) throws DiagonalMoveException {
         int horizontalSteps = destination.getX() - position.getCoordinates().getX();
         int vericalSteps = destination.getY() - position.getCoordinates().getY();
 
         if ( horizontalSteps != 0 && vericalSteps != 0 ) {
             throw new DiagonalMoveException();
         }
-        if ( destination.distance(position.getCoordinates()) > speed) {
+    }
+    protected void ensureDistanceIsAcceptable(Point destination, int chekcedParameter) throws ToFarException {
+        if ( destination.distance(position.getCoordinates()) > chekcedParameter) {
             throw new ToFarException();
         }
     }
@@ -98,6 +102,9 @@ public abstract class Unit implements Observer, Observable {
     public final int getDamage() {
             return damage;
         }
+    public int getAttackRadius() {
+        return attackRadius;
+    }
     public final boolean isUndead() {
             return undead;
         }
@@ -129,6 +136,10 @@ public abstract class Unit implements Observer, Observable {
     public void setDamage(int newDamage) {
             this.damage = newDamage;
         }
+    public void setAttackRadius(int attackRadius) {
+        this.attackRadius = attackRadius;
+    }
+
     public void setUnitType(UnitType newUnitType) {
             unitType = newUnitType;
         }
@@ -142,7 +153,7 @@ public abstract class Unit implements Observer, Observable {
         altState = newAltState;
     }
 
-    public void move(int newX, int newY) throws FieldIsOccupiedException, ToFarException, DiagonalMoveException, LocationIsNotFreeException {
+    public void move(int newX, int newY) throws FieldIsOccupiedException, ToFarException, DiagonalMoveException, LocationIsNotFreeException, ToFarException {
         Point destination = new Point(newX, newY);
         ArrayList<Location> path;
         ListIterator<Location> it;
@@ -150,7 +161,8 @@ public abstract class Unit implements Observer, Observable {
         if ( destination.equals(position.getCoordinates()) ) {
             return;
         }
-        ensureDistanceIsAcceptable(destination);
+        ensureIsNotDiagonalMove(destination);
+        ensureDistanceIsAcceptable(destination, speed);
         path = specifyPath(destination);
         it = path.listIterator(path.size());
         Location checkedLocation = null;
@@ -200,9 +212,10 @@ public abstract class Unit implements Observer, Observable {
     public void changeAbility(Ability newAbility) {
             ability = newAbility;
         }
-    public void attack(Unit enemy) throws UnitIsDeadException, SelfAttackException, MasterAttackException {
+    public void attack(Unit enemy) throws UnitIsDeadException, SelfAttackException, MasterAttackException, ToFarException, ToFarException {
             ensureIsAlive();
             ensureIsNotSelfAttack(enemy);
+            ensureDistanceIsAcceptable(enemy.getPosition().getCoordinates(), attackRadius);
             ability.attack(enemy);
         }
     public void counterAttack(Unit enemy) throws UnitIsDeadException {
