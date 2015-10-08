@@ -6,8 +6,9 @@ import Units.*;
 public class Desk {
     public int deskSize;
     public Location[][] deskFields;
+    private static Desk instance;
 
-    public Desk() {
+    private Desk() {
         deskSize = 9; // 8 available point in one line
         deskFields = new Location[deskSize][deskSize];
 
@@ -17,7 +18,7 @@ public class Desk {
             }
         }
     }
-    public Desk(int deskSize) {
+    private Desk(int deskSize) {
         this.deskSize = deskSize + 1; // deskSize available point in one line
         deskFields = new Location[this.deskSize][this.deskSize];
 
@@ -27,6 +28,19 @@ public class Desk {
             }
         }
     }
+    public static Desk getInstance() {
+        if ( instance == null ) {
+            instance = new Desk();
+        }
+        return instance;
+    }
+    public static Desk getInstance(int deskSize) {
+        if ( instance == null ) {
+            instance = new Desk(deskSize);
+        }
+        return instance;
+    }
+
     public Location getLocation(int x, int y) {
         return deskFields[x][y];
     }
