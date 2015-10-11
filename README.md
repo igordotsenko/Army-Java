@@ -32,7 +32,7 @@ Desk and units can be visualized in console.
 <li><b>Healer:</b> healing spellcaster (battle spells have half effect)</li>
 <li><b>Priest:</b> healing spellcaster (battle spells have half effect on every unit except undeads)</li>
 <li><b>Warlock:</b> battle spellcaster (battle spells have half effect). Can summon a Daemon</li>
-<li><b>Necromancer:</b> undead. Battle spellcaster (battle spells have half effect). After attack on unit (phisicaly or by spell) starts observing this unit. After the death of observable unit, Necromancer gets part of obervable's heat points. Necromancer cannot be healed in other way</li>
+<li><b>Necromancer:</b> undead. Battle spellcaster (healing spells have half effect). After attack on unit (phisicaly or by spell) starts observing this unit. After the death of observable unit, Necromancer gets part of obervable's heat points. Necromancer cannot be healed in other way</li>
 
 <b><i>Basic spells</i></b>
 
