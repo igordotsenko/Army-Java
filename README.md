@@ -2,7 +2,7 @@
 
 <b>Summary</b>
 
-Study project which I keep developing.
+Study project which is still being developed.
 Library for turn-based strategy which is close to Heroes of Might and Magic III battle.
 
 <b>General description</b>
@@ -11,36 +11,37 @@ Library for turn-based strategy which is close to Heroes of Might and Magic III 
 <li><b>Unit:</b> abstract warrior specializing in physical damage</li>
 <li><b>Spellcaster:</b> abstract warrior specializing in magic damage. Is Unit subclass</li>
 
-All units are situated on desk with size 8x8 cells or larger.
+All units are situated on desk 8x8 cells size or larger.
 In one cell can be only one unit at once.
-Units can move vertically and horizontally through the desk.
+Units can move vertically and horizontally along the desk by specified amount of cells at once.
 Every unit can attack another unit.
-If another unit stays alive after being attacked, he automatically conducts a counter-attack (brings half of damage).
-Damage of spellcaster is less then unit's damage.
-Desk and units could be visualisated in console.
+If another unit stays alive after being attacked, it automatically conducts a counter-attack (brings half of damage).
+Damage of spellcaster is less than unit's damage.
+Desk and units can be visualized in console.
 
 <b><i>Warrior units</i></b>
 <li><b>Soldier:</b> unit without any special abilities</li>
-<li><b>Daemon:</b> same to the soldier. Can be only summoned by Warlock</li>
+<li><b>Daemon:</b> similar to the Soldier. Can be only summoned by Warlock</li>
 <li><b>Rogue:</b> cannot be counter-attacked</li>
 <li><b>Berserker:</b> resistant to magic</li>
-<li><b>Vampire:</b> undead. Whenever attacks an enemy, drains part of its life and heal himself. Can infect another unit (except werewolf) after which it become a vampire. Cannot be healed</li>
-<li><b>Werewolf:</b> has two states - human and wolf. In state of wolf has larger heat points and damage points, but takes more magic damage. Can infect another unit (except vampire) after which it become a werewolf</li>
+<li><b>Vampire:</b> undead. Whenever attacks an enemy, drains part of enemy's life and use it to heal itself. Can infect another unit (except Werewolf) after which this unit becomes a Vampire. Cannot be healed </li>
+<li><b>Werewolf:</b> has two states - human and wolf. In human state is similar to the Soldier. In wolf state has larger heat points and damage points, but takes more magic damage. Can infect another unit (except Vampire) after which this unit becomes a Werewolf</li>
 
 <b><i>Magic units</i></b>
-<li><b>Wizard:</b> battle mage (healing spells have half effect)</li>
-<li><b>Healer:</b> healing mage (battle spells have half effect)</li>
-<li><b>Priest:</b> healing mage (battle spells have half effect on every unit except undeads)</li>
-<li><b>Warlock:</b> battle mage (battle spells have half effect). Can summon a Daemon</li>
-<li><b>Necromancer:</b> undead. Battle mage (battle spells have half effect). Observes everyone whom attacked (phisicaly or by spell). After the death of observable get part of its heat points. Can not be healed</li>
+<li><b>Wizard:</b> battle spellcaster (healing spells have half effect)</li>
+<li><b>Healer:</b> healing spellcaster (battle spells have half effect)</li>
+<li><b>Priest:</b> healing spellcaster (battle spells have half effect on every unit except undeads)</li>
+<li><b>Warlock:</b> battle spellcaster (battle spells have half effect). Can summon a Daemon</li>
+<li><b>Necromancer:</b> undead. Battle spellcaster (battle spells have half effect). After attack on unit (phisicaly or by spell) starts observing this unit. After the death of observable unit, Necromancer gets part of obervable's heat points. Necromancer cannot be healed</li>
 
 <b><i>Basic spells</i></b>
 
-All spells are contained in mage's spellbook.
-Every spell has cost (mana points) and action points which may be different.
-Every spell has radius of using.
+There are battle (make damage) and healing (heal unit) spells. 
+All spells are contained in spellcaster's spellbook.
+Every spell has cost (mana points) and action points which can be different.
+Every spell has specified radius of casting.
 
-<li><b>Fireaball:</b> battle spell</li>
+<li><b>Fireball:</b> battle spell</li>
 <li><b>Heal:</b> healing spell</li>
 
 
