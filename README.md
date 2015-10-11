@@ -3,7 +3,7 @@
 <b>Summary</b>
 
 Study project which is still being developed.
-Library for turn-based strategy which is close to Heroes of Might and Magic III battle.
+Library for turn-based strategy which is close to Heroes of Might and Magic III battle mechanic.
 
 <b>General description</b>
 
@@ -16,7 +16,7 @@ In one cell can be only one unit at once.
 Units can move vertically and horizontally along the desk by specified amount of cells at once.
 Every unit can attack another unit.
 If another unit stays alive after being attacked, it automatically conducts a counter-attack (brings half of damage).
-Damage of spellcaster is less than unit's damage.
+Damage of spellcaster is less than other unit's damage.
 Desk and units can be visualized in console.
 
 <b><i>Warrior units</i></b>
@@ -24,7 +24,7 @@ Desk and units can be visualized in console.
 <li><b>Daemon:</b> similar to the Soldier. Can be only summoned by Warlock</li>
 <li><b>Rogue:</b> cannot be counter-attacked</li>
 <li><b>Berserker:</b> resistant to magic</li>
-<li><b>Vampire:</b> undead. Whenever attacks an enemy, drains part of enemy's life and use it to heal itself. Can infect another unit (except Werewolf) after which this unit becomes a Vampire. Cannot be healed </li>
+<li><b>Vampire:</b> undead. Whenever attacks an enemy, drains part of enemy's life and use it to heal itself. Can infect another unit (except Werewolf) after which this unit becomes a Vampire. Cannot be healed in other way</li>
 <li><b>Werewolf:</b> has two states - human and wolf. In human state is similar to the Soldier. In wolf state has larger heat points and damage points, but takes more magic damage. Can infect another unit (except Vampire) after which this unit becomes a Werewolf</li>
 
 <b><i>Magic units</i></b>
@@ -32,7 +32,7 @@ Desk and units can be visualized in console.
 <li><b>Healer:</b> healing spellcaster (battle spells have half effect)</li>
 <li><b>Priest:</b> healing spellcaster (battle spells have half effect on every unit except undeads)</li>
 <li><b>Warlock:</b> battle spellcaster (battle spells have half effect). Can summon a Daemon</li>
-<li><b>Necromancer:</b> undead. Battle spellcaster (battle spells have half effect). After attack on unit (phisicaly or by spell) starts observing this unit. After the death of observable unit, Necromancer gets part of obervable's heat points. Necromancer cannot be healed</li>
+<li><b>Necromancer:</b> undead. Battle spellcaster (battle spells have half effect). After attack on unit (phisicaly or by spell) starts observing this unit. After the death of observable unit, Necromancer gets part of obervable's heat points. Necromancer cannot be healed in other way</li>
 
 <b><i>Basic spells</i></b>
 
