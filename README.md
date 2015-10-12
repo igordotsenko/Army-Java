@@ -31,8 +31,10 @@ Desk and units can be visualized in console.
 <li><b>Wizard:</b> battle spellcaster (healing spells have half effect)</li>
 <li><b>Healer:</b> healing spellcaster (battle spells have half effect)</li>
 <li><b>Priest:</b> healing spellcaster (battle spells have half effect on every unit except undeads)</li>
-<li><b>Warlock:</b> battle spellcaster (battle spells have half effect). Can summon a Daemon</li>
+<li><b>Warlock:</b> battle spellcaster (healing spells have half effect). Can summon a Daemon</li>
 <li><b>Necromancer:</b> undead. Battle spellcaster (healing spells have half effect). After attack on unit (phisicaly or by spell) starts observing this unit. After the death of observable unit, Necromancer gets part of obervable's heat points. Necromancer cannot be healed in other way</li>
+
+All special abilities of units implemented in special classes, extended from abstract class Ability
 
 <b><i>Basic spells</i></b>
 
@@ -43,6 +45,13 @@ Every spell has specified radius of casting.
 
 <li><b>Fireball:</b> battle spell</li>
 <li><b>Heal:</b> healing spell</li>
+
+<b><i>Implemented design patterns</i></b>
+<li><b>Singleton</b> for Desk</li>
+<li><b>State</b> for Werewolf (tranforming from human to wolf and back) </li>
+<li><b>Strategy</b> for Spellcasters (spell change) and Units (ability change)</li>
+<li><b>Observer</b> for Necromancer</li>
+<li><b>Iterator</b> for Observer realization</li>
 
 
 
