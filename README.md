@@ -51,7 +51,6 @@ Every spell has specified radius of casting.
 <li><b>State</b> for Werewolf (tranforming from human to wolf and back) </li>
 <li><b>Strategy</b> for Spellcasters (spell change) and Units (ability change)</li>
 <li><b>Observer</b> for Necromancer</li>
-<li><b>Iterator</b> for Observer realization</li>
 
 
 
